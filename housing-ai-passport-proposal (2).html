@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>住宅AIパスポート 企画書</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --ink-mid: #3a3830;
+    --ink-light: #7a7568;
+    --parchment: #f7f4ee;
+    --warm-white: #fdfcf9;
+    --accent-gold: #b8913a;
+    --accent-gold-light: #e8d5a3;
+    --accent-red: #9b2c2c;
+    --accent-green: #2d5a3d;
+    --accent-navy: #1a2744;
+    --rule: #d4cfc4;
+    --section-bg: #f0ece3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* ─── COVER ─── */
+  .cover {
+    min-height: 100vh;
+    background: var(--accent-navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 40px;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 59px,
+        rgba(255,255,255,0.03) 60px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 59px,
+        rgba(255,255,255,0.03) 60px
+      );
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -120px;
+    right: -80px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,145,58,0.2);
+    pointer-events: none;
+  }
+
+  .cover-eyebrow {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .cover-badge {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .badge-block {
+    text-align: center;
+  }
+
+  .badge-name {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .badge-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #fff;
+  }
+
+  .badge-divider {
+    font-size: 24px;
+    color: var(--accent-gold);
+    font-weight: 300;
+  }
+
+  .cover-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: clamp(38px, 6vw, 68px);
+    color: #fff;
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .cover-title span {
+    color: var(--accent-gold);
+  }
+
+  .cover-subtitle {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: clamp(14px, 2vw, 18px);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    letter-spacing: 0.05em;
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.0s forwards;
+  }
+
+  .cover-meta-item {
+    text-align: center;
+  }
+
+  .cover-meta-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.35);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cover-meta-value {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .cover-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--accent-gold);
+    margin: 32px auto;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  /* ─── TOC ─── */
+  .toc {
+    background: var(--warm-white);
+    padding: 80px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .toc-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .toc-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .toc-list {
+    list-style: none;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .toc-item:hover { color: var(--accent-gold); }
+
+  .toc-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    color: var(--accent-gold);
+    min-width: 28px;
+  }
+
+  .toc-label {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 400;
+    flex: 1;
+  }
+
+  .toc-dot {
+    flex: 1;
+    border-bottom: 1px dotted var(--rule);
+    margin: 0 8px;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: 100px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section:nth-child(even) {
+    background: var(--warm-white);
+  }
+
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 64px;
+  }
+
+  .section-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 80px;
+    line-height: 0.85;
+    color: var(--accent-gold-light);
+    flex-shrink: 0;
+    margin-top: -8px;
+  }
+
+  .section-header-text {}
+
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 32px);
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .section-lead {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 2;
+    color: var(--ink-mid);
+    margin-bottom: 48px;
+    border-left: 3px solid var(--accent-gold);
+    padding-left: 24px;
+  }
+
+  /* ─── CARDS ─── */
+  .card-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .card-grid-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--parchment);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--accent-gold);
+    padding: 28px 28px 32px;
+  }
+
+  .card-dark {
+    background: var(--accent-navy);
+    border-color: transparent;
+    border-top-color: var(--accent-gold);
+    color: #fff;
+  }
+
+  .card-green {
+    background: var(--accent-green);
+    border-color: transparent;
+    border-top-color: var(--accent-gold);
+    color: #fff;
+  }
+
+  .card-red {
+    background: var(--accent-red);
+    border-color: transparent;
+    border-top-color: var(--accent-gold);
+    color: #fff;
+  }
+
+  .card-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    color: var(--accent-gold);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .card-dark .card-num,
+  .card-green .card-num,
+  .card-red .card-num {
+    color: var(--accent-gold-light);
+  }
+
+  .card-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .card-dark .card-title,
+  .card-green .card-title,
+  .card-red .card-title {
+    color: #fff;
+  }
+
+  .card-body {
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--ink-light);
+  }
+
+  .card-dark .card-body,
+  .card-green .card-body,
+  .card-red .card-body {
+    color: rgba(255,255,255,0.72);
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+    margin-bottom: 12px;
+  }
+
+  /* ─── LEVEL TIERS ─── */
+  .tier {
+    display: flex;
+    gap: 0;
+    margin-bottom: 20px;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .tier-marker {
+    width: 8px;
+    flex-shrink: 0;
+  }
+
+  .tier-l1 .tier-marker { background: #4a7c59; }
+  .tier-l2 .tier-marker { background: var(--accent-gold); }
+  .tier-l3 .tier-marker { background: var(--accent-red); }
+
+  .tier-body {
+    flex: 1;
+    padding: 24px 28px;
+    background: var(--warm-white);
+  }
+
+  .tier-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .tier-level {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--accent-gold);
+    line-height: 1;
+  }
+
+  .tier-name {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .tier-target {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-light);
+    border: 1px solid var(--rule);
+    padding: 2px 10px;
+    margin-left: auto;
+  }
+
+  .tier-desc {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .tier-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tier-tag {
+    font-size: 11px;
+    background: var(--parchment);
+    border: 1px solid var(--rule);
+    padding: 3px 12px;
+    color: var(--ink-light);
+  }
+
+  /* ─── EXPOSURE TABLE ─── */
+  .exposure-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .exposure-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .exposure-row-header {
+    background: var(--accent-navy);
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+  }
+
+  .exp-cell {
+    padding: 18px 20px;
+    border-right: 1px solid var(--rule);
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+
+  .exp-cell:last-child { border-right: none; }
+
+  .exp-cell-label {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .exp-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .exp-merit {
+    color: var(--ink-mid);
+    font-size: 13px;
+  }
+
+  .exp-merit strong {
+    color: var(--accent-green);
+    font-weight: 500;
+  }
+
+  /* ─── BUSINESS MODEL ─── */
+  .biz-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 48px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+
+  .biz-node {
+    flex: 1;
+    padding: 28px 20px;
+    text-align: center;
+    background: var(--warm-white);
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .biz-node:last-child { border-right: none; }
+
+  .biz-node-accent {
+    background: var(--accent-navy);
+    color: #fff;
+  }
+
+  .biz-node::after {
+    content: '→';
+    position: absolute;
+    right: -13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-gold);
+    font-size: 18px;
+    z-index: 1;
+    background: var(--parchment);
+    width: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .biz-node:last-child::after { display: none; }
+
+  .biz-node-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .biz-node-name {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .biz-node-accent .biz-node-name { color: #fff; }
+  .biz-node-accent .biz-node-label { color: var(--accent-gold-light); }
+
+  /* ─── REVENUE TABLE ─── */
+  .revenue-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+  }
+
+  .revenue-table th {
+    background: var(--accent-navy);
+    color: rgba(255,255,255,0.7);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    padding: 14px 20px;
+    text-align: left;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .revenue-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    font-size: 13.5px;
+    color: var(--ink-mid);
+    vertical-align: top;
+    line-height: 1.7;
+  }
+
+  .revenue-table td:first-child {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--section-bg);
+    width: 160px;
+  }
+
+  .revenue-table td:last-child { border-right: none; }
+
+  .price-highlight {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ─── PHASE TIMELINE ─── */
+  .phase-timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .phase-timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  .phase {
+    position: relative;
+    margin-bottom: 48px;
+  }
+
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: -34px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    border: 2px solid var(--parchment);
+    box-shadow: 0 0 0 1px var(--accent-gold);
+  }
+
+  .phase-period {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .phase-name {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .phase-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .phase-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
+  .phase-item::before {
+    content: '—';
+    color: var(--accent-gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ─── ROLE TABLE ─── */
+  .role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .role-card {
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .role-header {
+    padding: 16px 20px;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .role-header-navy { background: var(--accent-navy); color: #fff; }
+  .role-header-gold { background: var(--accent-gold); color: #fff; }
+  .role-header-green { background: var(--accent-green); color: #fff; }
+
+  .role-sub {
+    font-size: 10px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    display: block;
+    margin-top: 3px;
+  }
+
+  .role-items {
+    padding: 20px;
+    list-style: none;
+    background: var(--warm-white);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .role-item {
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .role-item::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent-gold);
+    font-size: 10px;
+    top: 3px;
+  }
+
+  /* ─── MERIT COMPARISON ─── */
+  .merit-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .merit-table th {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    padding: 14px 20px;
+    text-align: left;
+  }
+
+  .merit-table th:first-child {
+    background: var(--section-bg);
+    color: var(--ink-light);
+    width: 160px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .merit-table th:nth-child(2) {
+    background: var(--accent-navy);
+    color: rgba(255,255,255,0.8);
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .merit-table th:nth-child(3) {
+    background: var(--accent-green);
+    color: rgba(255,255,255,0.8);
+  }
+
+  .merit-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    vertical-align: top;
+  }
+
+  .merit-table td:first-child {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--section-bg);
+  }
+
+  .merit-table td:last-child { border-right: none; }
+
+  /* ─── CLOSING ─── */
+  .closing {
+    background: var(--accent-navy);
+    padding: 100px 40px;
+    text-align: center;
+  }
+
+  .closing-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-gold);
+    margin-bottom: 32px;
+    display: block;
+  }
+
+  .closing-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: clamp(22px, 4vw, 38px);
+    color: #fff;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .closing-title strong {
+    color: var(--accent-gold);
+    font-weight: 700;
+  }
+
+  .closing-items {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .closing-item {
+    text-align: center;
+  }
+
+  .closing-item-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: var(--accent-gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .closing-item-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 8px;
+    display: block;
+  }
+
+  /* ─── UTILS ─── */
+  .rule-gold {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+    margin: 40px 0;
+  }
+
+  .text-gold { color: var(--accent-gold); }
+  .text-muted { color: var(--ink-light); }
+  .font-serif { font-family: 'Noto Serif JP', serif; }
+
+  .note {
+    font-size: 12px;
+    color: var(--ink-light);
+    border-left: 2px solid var(--rule);
+    padding-left: 16px;
+    margin-top: 20px;
+    line-height: 1.8;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 4px 14px;
+    background: var(--accent-gold);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .card-grid-2, .card-grid-3, .role-grid { grid-template-columns: 1fr; }
+    .exposure-row { grid-template-columns: 1fr; }
+    .biz-flow { flex-direction: column; }
+    .biz-node::after { display: none; }
+    .tier-header { flex-wrap: wrap; }
+    .cover-meta { gap: 24px; flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<section class="cover" id="cover">
+  <p class="cover-eyebrow">Business Proposal — Confidential</p>
+  <div class="cover-badge">
+    <div class="badge-block">
+      <span class="badge-name">認定機関</span>
+      <span class="badge-logo">新建ハウジング</span>
+    </div>
+    <span class="badge-divider">×</span>
+    <div class="badge-block">
+      <span class="badge-name">企画・運営</span>
+      <span class="badge-logo">SHO-SAN / BAA</span>
+    </div>
+  </div>
+  <div class="cover-rule"></div>
+  <h1 class="cover-title">住宅<span>AI</span>パスポート<br>企画書</h1>
+  <p class="cover-subtitle">住宅業界初・新建ハウジング認定のAI人材資格制度</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">STATUS</span>
+      <span class="cover-meta-value">企画書 v1.0</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">PREPARED BY</span>
+      <span class="cover-meta-value">株式会社SHO-SAN</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">TARGET</span>
+      <span class="cover-meta-value">工務店・住宅会社</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TOC ═══ -->
+<section class="toc">
+  <div class="toc-inner">
+    <p class="toc-title">Contents</p>
+    <ul class="toc-list">
+      <li class="toc-item" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">
+        <span class="toc-num">01</span>
+        <span class="toc-label">事業背景と市場機会</span>
+      </li>
+      <li class="toc-item" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">
+        <span class="toc-num">02</span>
+        <span class="toc-label">資格制度の全体設計</span>
+      </li>
+      <li class="toc-item" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})">
+        <span class="toc-num">03</span>
+        <span class="toc-label">新建ハウジング認定の価値と露出設計</span>
+      </li>
+      <li class="toc-item" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})">
+        <span class="toc-num">04</span>
+        <span class="toc-label">経営者・社員にとってのメリット</span>
+      </li>
+      <li class="toc-item" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})">
+        <span class="toc-num">05</span>
+        <span class="toc-label">役割分担とビジネスモデル</span>
+      </li>
+      <li class="toc-item" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})">
+        <span class="toc-num">06</span>
+        <span class="toc-label">事業フェーズ計画</span>
+      </li>
+      <li class="toc-item" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})">
+        <span class="toc-num">07</span>
+        <span class="toc-label">権威付け戦略　—　連携候補と実現ロードマップ</span>
+      </li>
+      <li class="toc-item" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})">
+        <span class="toc-num">08</span>
+        <span class="toc-label">夢想図　—　こんな資格にしたい</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ SECTION 01 ═══ -->
+<section class="section" id="s1">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-header-text">
+        <span class="section-eyebrow">Background & Opportunity</span>
+        <h2 class="section-title">事業背景と<br>市場機会</h2>
+      </div>
+    </div>
+
+    <p class="section-lead">
+      住宅業界のAI活用は急速に進んでいるが、<br>「住宅業界に特化したAI人材資格」は存在しない。<br>この空白地帯が、最大のビジネス機会である。
+    </p>
+
+    <div class="card-grid card-grid-3" style="margin-bottom:32px">
+      <div class="card card-dark">
+        <div class="card-num">①</div>
+        <div class="card-title">業界停滞期＝学習の好機</div>
+        <div class="card-body">市場の動きが止まっている今こそ、AI導入準備を進めるべき時期。再始動時に備えた人材整備が急務。</div>
+      </div>
+      <div class="card card-dark">
+        <div class="card-num">②</div>
+        <div class="card-title">汎用AI資格の限界</div>
+        <div class="card-body">G検定・生成AIパスポートは「住宅業務でどう使えるか」を証明できない。業界特化の資格に強いニーズがある。</div>
+      </div>
+      <div class="card card-dark">
+        <div class="card-num">③</div>
+        <div class="card-title">人手不足への構造的備え</div>
+        <div class="card-body">市場再始動時に人手不足が発生する。「AI活用で少人数でも高生産性」を実現できる人材証明が必要。</div>
+      </div>
+    </div>
+
+    <div class="rule-gold"></div>
+
+    <div class="card-grid card-grid-2">
+      <div class="card">
+        <span class="card-tag">先行事例</span>
+        <div class="card-title">国内AI資格の成長実績</div>
+        <div class="card-body">GUGAの生成AIパスポートは2023年設立から累計9.2万名超に到達。年間4.4万名のペースで拡大中。業界特化なら競合が少なく、より強固なポジションを確立できる。</div>
+      </div>
+      <div class="card">
+        <span class="card-tag">差別化ポイント</span>
+        <div class="card-title">「住宅業界唯一」の希少性</div>
+        <div class="card-body">医療AI資格（日本メディカルAI学会）が業界特化で成功しているように、住宅業界向けに特化することで、汎用資格との競合を避け、圧倒的な希少性を持てる。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 02 ═══ -->
+<section class="section" id="s2">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-header-text">
+        <span class="section-eyebrow">Certification Structure</span>
+        <h2 class="section-title">資格制度の<br>全体設計</h2>
+      </div>
+    </div>
+
+    <p class="section-lead">
+      経営者から現場スタッフまで、3つの階層で<br>住宅業界全体のAIリテラシーを底上げする。
+    </p>
+
+    <!-- Level Tiers -->
+    <div class="tier tier-l3" style="margin-bottom:16px">
+      <div class="tier-marker"></div>
+      <div class="tier-body">
+        <div class="tier-header">
+          <div class="tier-level">L3</div>
+          <div class="tier-name">住宅AIストラテジスト</div>
+          <span class="tier-target">経営者・幹部向け</span>
+        </div>
+        <p class="tier-desc">AI導入の経営判断・組織全体への展開を主導できる人材を認定。全社的なAI戦略を設計・推進する力を証明する上位資格。</p>
+        <div class="tier-tags">
+          <span class="tier-tag">AI経営戦略</span>
+          <span class="tier-tag">ROI設計</span>
+          <span class="tier-tag">組織変革</span>
+          <span class="tier-tag">リスク管理</span>
+          <span class="tier-tag">住宅業界AI動向</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier tier-l2" style="margin-bottom:16px">
+      <div class="tier-marker"></div>
+      <div class="tier-body">
+        <div class="tier-header">
+          <div class="tier-level">L2</div>
+          <div class="tier-name">住宅AIスペシャリスト</div>
+          <span class="tier-target">リーダー・中堅向け</span>
+        </div>
+        <p class="tier-desc">部門・チームへのAI実装をリードできる実力を認定。業務プロセスへのAI組み込みと、チームへの展開・教育ができる人材。</p>
+        <div class="tier-tags">
+          <span class="tier-tag">業務AI実装</span>
+          <span class="tier-tag">プロンプト設計</span>
+          <span class="tier-tag">チーム展開</span>
+          <span class="tier-tag">住宅営業AI活用</span>
+          <span class="tier-tag">設計・施工AI活用</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier tier-l1">
+      <div class="tier-marker"></div>
+      <div class="tier-body">
+        <div class="tier-header">
+          <div class="tier-level">L1</div>
+          <div class="tier-name">住宅AIパスポート</div>
+          <span class="tier-target">全スタッフ向け</span>
+        </div>
+        <p class="tier-desc">住宅業界に関わるすべてのスタッフが取得を目指す入口資格。日常業務でのAI安全活用と基礎リテラシーを証明する。</p>
+        <div class="tier-tags">
+          <span class="tier-tag">AI基礎知識</span>
+          <span class="tier-tag">生成AI活用</span>
+          <span class="tier-tag">セキュリティ・倫理</span>
+          <span class="tier-tag">住宅業務での活用事例</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule-gold"></div>
+
+    <div class="card-grid card-grid-3">
+      <div class="card">
+        <div class="card-title">試験形式</div>
+        <div class="card-body">オンライン選択式（IBT方式）。自宅・オフィスから受験可能。L1は随時受験、L2・L3は年複数回の期間限定開催。</div>
+      </div>
+      <div class="card">
+        <div class="card-title">認定・バッジ</div>
+        <div class="card-body">合格者に認定証・デジタルバッジを発行。ブロックチェーン技術による改ざん防止。LinkedInや名刺への掲載も可。</div>
+      </div>
+      <div class="card">
+        <div class="card-title">更新制度</div>
+        <div class="card-body">2年更新制を採用（AIの進化スピードに対応）。更新受験料を設定することで継続的な収益源にもなる。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 03 ═══ -->
+<section class="section" id="s3">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-header-text">
+        <span class="section-eyebrow">Authority & Exposure Design</span>
+        <h2 class="section-title">新建ハウジング認定の<br>価値と露出設計</h2>
+      </div>
+    </div>
+
+    <p class="section-lead">
+      意識・意欲の高いトップランナー工務店が読者の中心。<br>その媒体の「認定」を受けることの価値は、他のAI資格が<br>絶対に持てない最大の差別化要素である。
+    </p>
+
+    <!-- Exposure Grid -->
+    <div class="exposure-grid">
+      <div class="exposure-row exposure-row-header">
+        <div class="exp-cell" style="padding:12px 20px; font-size:10px; letter-spacing:0.15em;">露出チャネル</div>
+        <div class="exp-cell" style="padding:12px 20px; font-size:10px; letter-spacing:0.15em;">経営者メリット</div>
+        <div class="exp-cell" style="padding:12px 20px; font-size:10px; letter-spacing:0.15em;">社員メリット</div>
+      </div>
+
+      <div class="exposure-row">
+        <div class="exp-cell">
+          <div class="exp-cell-label">
+            <div class="exp-icon">紙</div>
+            紙面・誌面掲載
+          </div>
+        </div>
+        <div class="exp-cell exp-merit">
+          <strong>認定企業一覧を定期掲載。</strong>広告費ゼロで業界誌に社名が載る唯一の方法。同業他社・仕入先・採用候補者の目に触れる。
+        </div>
+        <div class="exp-cell exp-merit">
+          合格者インタビューとして個人名が業界紙に掲載される体験。家族にも見せられる実績になる。
+        </div>
+      </div>
+
+      <div class="exposure-row">
+        <div class="exp-cell">
+          <div class="exp-cell-label">
+            <div class="exp-icon">W</div>
+            WEB常設ページ
+          </div>
+        </div>
+        <div class="exp-cell exp-merit">
+          <strong>認定企業専用ページが常設。</strong>新建ハウジングDIGITALへの被リンクはSEO的にも価値が高い。施主がGoogle検索した際にも目に触れる。
+        </div>
+        <div class="exp-cell exp-merit">
+          合格者として名前・所属・コメントがWEBに掲載。LinkedINや転職活動での実績証明になる。
+        </div>
+      </div>
+
+      <div class="exposure-row">
+        <div class="exp-cell">
+          <div class="exp-cell-label">
+            <div class="exp-icon">▶</div>
+            セミナー・登壇
+          </div>
+        </div>
+        <div class="exp-cell exp-merit">
+          <strong>工務店経営会議での「認定企業」紹介コーナー。</strong>業界最大イベントでの露出は、採用・受注・信頼性の向上に直結。
+        </div>
+        <div class="exp-cell exp-merit">
+          新建ハウジング主催セミナーで「AI活用実践者」として登壇機会が生まれる。対外発信力が高まる。
+        </div>
+      </div>
+
+      <div class="exposure-row">
+        <div class="exp-cell">
+          <div class="exp-cell-label">
+            <div class="exp-icon">▷</div>
+            YouTube・SNS
+          </div>
+        </div>
+        <div class="exp-cell exp-merit">
+          <strong>合格者・認定企業の動画取材。</strong>新建ハウジングYouTubeチャンネルへの出演は採用ブランディングとして機能する。
+        </div>
+        <div class="exp-cell exp-merit">
+          SNSで合格を投稿すると、新建ハウジング公式アカウントからシェア・紹介される仕組みを設計。
+        </div>
+      </div>
+
+      <div class="exposure-row">
+        <div class="exp-cell">
+          <div class="exp-cell-label">
+            <div class="exp-icon">☆</div>
+            認定ロゴ使用権
+          </div>
+        </div>
+        <div class="exp-cell exp-merit">
+          <strong>「新建ハウジング認定企業」ロゴをHPに掲載。</strong>施主への信頼性向上・競合との差別化に直接機能する。モデルハウスや営業資料にも使用可。
+        </div>
+        <div class="exp-cell exp-merit">
+          個人向けデジタルバッジをLinkedIn・名刺・メール署名に掲載可能。業界内での個人ブランディングが高まる。
+        </div>
+      </div>
+
+      <div class="exposure-row">
+        <div class="exp-cell">
+          <div class="exp-cell-label">
+            <div class="exp-icon">人</div>
+            認定者コミュニティ
+          </div>
+        </div>
+        <div class="exp-cell exp-merit">
+          <strong>社員が全国のトップ工務店担当者とつながる。</strong>良質な他流試合の機会が生まれ、社員の定着率・成長速度に直結する。
+        </div>
+        <div class="exp-cell exp-merit">
+          合格者限定クローズドコミュニティへの参加権。同業他社の同レベル人材との横のつながりが生まれる。
+        </div>
+      </div>
+    </div>
+
+    <p class="note">※ 露出設計の詳細・頻度・実施時期については新建ハウジング小柴様と詳細協議を行う。上記は実現可能性の高い施策として整理したもの。</p>
+  </div>
+</section>
+
+<!-- ═══ SECTION 04 ═══ -->
+<section class="section" id="s4">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-header-text">
+        <span class="section-eyebrow">Value Proposition</span>
+        <h2 class="section-title">経営者・社員にとっての<br>メリット</h2>
+      </div>
+    </div>
+
+    <p class="section-lead">
+      経営者が「取らせたい」と思い、<br>社員が「自分から取りたい」と思う設計。<br>両者の動機が重なる資格でなければ普及しない。
+    </p>
+
+    <table class="merit-table">
+      <thead>
+        <tr>
+          <th>価値の種類</th>
+          <th>経営者が「取らせたい」理由</th>
+          <th>社員が「取りたい」理由</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>採用・ブランド</td>
+          <td>「AI人材育成に力を入れている会社」として求人票に記載できる。若い人材が「ちゃんと教えてくれる会社」と感じる。</td>
+          <td>「AI人材として育ててもらえる会社」という入社動機につながる。</td>
+        </tr>
+        <tr>
+          <td>業務品質・標準化</td>
+          <td>社内のAI活用レベルがバラバラな状態を解消できる。「資格保有者がいる＝一定水準以上の組織」と証明できる。</td>
+          <td>自分のAI活用スキルが客観的に証明され、社内での評価基準が明確になる。</td>
+        </tr>
+        <tr>
+          <td>施主への信頼性</td>
+          <td>「新建ハウジング認定のAI活用企業」をHPに掲示。競合が言えない差別化ポイントになる。</td>
+          <td>名刺・署名に「住宅AIスペシャリスト認定」と書ける。商談での話題にもなる。</td>
+        </tr>
+        <tr>
+          <td>業界内地位</td>
+          <td>新建ハウジング誌面・WEBに社名が載る。同業者・仕入先からの見え方が変わる。</td>
+          <td>業界紙に自分の名前が載る。コミュニティで全国の同業担当者とつながれる。</td>
+        </tr>
+        <tr>
+          <td>キャリア・報酬</td>
+          <td>資格手当・一時金を制度化しやすい。社員の定着・モチベーション向上につながる。</td>
+          <td>住宅業界特化の資格として転職市場でも評価される。給与・一時金に直結する基準になる。</td>
+        </tr>
+        <tr>
+          <td>BAAとのシナジー</td>
+          <td>BAA（AI教育）の受講とセットで「学んで→証明できる」流れが完結。投資対効果が明確になる。</td>
+          <td>BAA受講で自然に資格取得に向かえる。学んだことが形になる体験が得られる。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="rule-gold"></div>
+
+    <div class="card-grid card-grid-2">
+      <div class="card card-green">
+        <div class="card-title">経営者向け　一言メッセージ</div>
+        <div class="card-body" style="font-family:'Noto Serif JP',serif; font-size:16px; line-height:2; color:rgba(255,255,255,0.9);">
+          「新建ハウジング認定の工務店」になることで、採用・施主信頼・業界内地位の3つが同時に上がる。広告費ゼロで業界誌に継続的に露出できる唯一の仕組み。
+        </div>
+      </div>
+      <div class="card card-dark">
+        <div class="card-title">社員向け　一言メッセージ</div>
+        <div class="card-body" style="font-family:'Noto Serif JP',serif; font-size:16px; line-height:2; color:rgba(255,255,255,0.9);">
+          「住宅業界でAIを使える人材」であることを、業界最大メディアのお墨付きで証明できる唯一の資格。転職市場でも、社内評価でも、キャリアの武器になる。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 05 ═══ -->
+<section class="section" id="s5">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-header-text">
+        <span class="section-eyebrow">Business Model & Roles</span>
+        <h2 class="section-title">役割分担と<br>ビジネスモデル</h2>
+      </div>
+    </div>
+
+    <p class="section-lead">
+      新建ハウジングの権威性とSHO-SANの実行力を掛け合わせ、<br>互いの強みを最大化する分業体制を設計する。
+    </p>
+
+    <!-- Role Cards -->
+    <div class="role-grid" style="margin-bottom:48px">
+      <div class="role-card">
+        <div class="role-header role-header-navy">
+          新建ハウジング
+          <span class="role-sub">認定機関・メディア</span>
+        </div>
+        <ul class="role-items">
+          <li class="role-item">資格名・認定証へのブランド提供</li>
+          <li class="role-item">誌面・WEBでの認定企業・合格者掲載</li>
+          <li class="role-item">セミナー・イベントでの露出機会提供</li>
+          <li class="role-item">YouTube・SNSでのコンテンツ展開</li>
+          <li class="role-item">読者ネットワークを通じた販路提供</li>
+          <li class="role-item">業界への普及推進・広報支援</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-header role-header-gold">
+          SHO-SAN
+          <span class="role-sub">企画・運営・システム</span>
+        </div>
+        <ul class="role-items">
+          <li class="role-item">資格制度の全体設計・シラバス策定</li>
+          <li class="role-item">試験システムの構築・運営管理</li>
+          <li class="role-item">認定証・デジタルバッジの発行管理</li>
+          <li class="role-item">合格者コミュニティの運営</li>
+          <li class="role-item">法人受験・団体申込の営業・対応</li>
+          <li class="role-item">収益管理・配分処理</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-header role-header-green">
+          BAA
+          <span class="role-sub">教育コンテンツ</span>
+        </div>
+        <ul class="role-items">
+          <li class="role-item">資格対応カリキュラムの開発・提供</li>
+          <li class="role-item">住宅業界特化のAI教育コンテンツ</li>
+          <li class="role-item">受験対策講座・公式テキスト</li>
+          <li class="role-item">BAA受講者への受験割引適用</li>
+          <li class="role-item">資格取得後の上位コース案内</li>
+          <li class="role-item">講師・コンテンツ制作の継続更新</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Biz Flow -->
+    <div style="margin-bottom:16px">
+      <span class="pill">受験者の購買導線</span>
+    </div>
+    <div class="biz-flow" style="margin-bottom:48px">
+      <div class="biz-node">
+        <span class="biz-node-label">ENTRY</span>
+        <span class="biz-node-name">新建ハウジング<br>誌面・WEBで認知</span>
+      </div>
+      <div class="biz-node">
+        <span class="biz-node-label">LEARN</span>
+        <span class="biz-node-name">BAA受講で<br>スキル習得</span>
+      </div>
+      <div class="biz-node biz-node-accent">
+        <span class="biz-node-label">CERTIFY</span>
+        <span class="biz-node-name">住宅AIパスポート<br>受験・合格</span>
+      </div>
+      <div class="biz-node">
+        <span class="biz-node-label">EXPOSE</span>
+        <span class="biz-node-name">新建ハウジングで<br>認定者として露出</span>
+      </div>
+      <div class="biz-node">
+        <span class="biz-node-label">RENEW</span>
+        <span class="biz-node-name">2年後に更新受験<br>・上位資格へ</span>
+      </div>
+    </div>
+
+    <!-- Revenue Table -->
+    <div style="margin-bottom:16px">
+      <span class="pill">収益の3本柱（価格試案）</span>
+    </div>
+    <table class="revenue-table">
+      <thead>
+        <tr>
+          <th>収益区分</th>
+          <th>個人受験</th>
+          <th>団体受験（5名以上）</th>
+          <th>BAA受講生</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>L1 住宅AIパスポート</td>
+          <td><span class="price-highlight">¥9,800</span>入門・全スタッフ対象</td>
+          <td><span class="price-highlight">¥8,500</span>/名 ×人数</td>
+          <td><span class="price-highlight">¥7,800</span>/名</td>
+        </tr>
+        <tr>
+          <td>L2 住宅AIスペシャリスト</td>
+          <td><span class="price-highlight">¥19,800</span>中堅・リーダー対象</td>
+          <td><span class="price-highlight">¥17,000</span>/名 ×人数</td>
+          <td><span class="price-highlight">¥15,800</span>/名</td>
+        </tr>
+        <tr>
+          <td>L3 住宅AIストラテジスト</td>
+          <td><span class="price-highlight">¥39,800</span>経営者・幹部対象</td>
+          <td><span class="price-highlight">¥35,000</span>/名 ×人数</td>
+          <td><span class="price-highlight">¥30,000</span>/名</td>
+        </tr>
+        <tr>
+          <td>更新受験（2年毎）</td>
+          <td><span class="price-highlight">初回の50%</span>継続的な収益源</td>
+          <td colspan="2" style="color:var(--ink-light)">団体・BAA割引適用可</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="note">※ 新建ハウジングへの収益配分方法（受験料の一定割合 or 固定フィー）は別途協議。公式テキスト・BAA講座との組み合わせ販売による追加収益も想定。</p>
+  </div>
+</section>
+
+<!-- ═══ SECTION 06 ═══ -->
+<section class="section" id="s6">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-header-text">
+        <span class="section-eyebrow">Implementation Roadmap</span>
+        <h2 class="section-title">事業フェーズ計画</h2>
+      </div>
+    </div>
+
+    <p class="section-lead">
+      まず「L1×新建ハウジング認定」で実績を作り、<br>段階的に資格体系と収益を拡大する3フェーズ戦略。
+    </p>
+
+    <div class="phase-timeline">
+      <div class="phase">
+        <span class="phase-period">Phase 1 ／ 〜6ヶ月</span>
+        <div class="phase-name">基盤構築フェーズ</div>
+        <ul class="phase-items">
+          <li class="phase-item">新建ハウジングとの役割分担・収益配分の合意形成</li>
+          <li class="phase-item">一般社団法人設立の要否検討（SHO-SAN単独運営 vs 共同設立）</li>
+          <li class="phase-item">L1「住宅AIパスポート」シラバス・試験問題の開発</li>
+          <li class="phase-item">BAA対応カリキュラム・公式テキストの整備</li>
+          <li class="phase-item">オンライン受験システムの構築（既存SaaSの活用検討）</li>
+          <li class="phase-item">デジタルバッジ・認定証の発行システム設計</li>
+          <li class="phase-item">新建ハウジング誌面での制度発表・告知記事の掲載</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <span class="phase-period">Phase 2 ／ 7〜12ヶ月</span>
+        <div class="phase-name">実績構築フェーズ</div>
+        <ul class="phase-items">
+          <li class="phase-item">L1 初回試験の実施・合格者輩出（目標：初回100名以上）</li>
+          <li class="phase-item">認定企業・合格者を新建ハウジング誌面・WEBで特集掲載</li>
+          <li class="phase-item">工務店経営会議での「住宅AI認定企業」紹介コーナー設置</li>
+          <li class="phase-item">合格者コミュニティ（Slack等）の立ち上げ・運営開始</li>
+          <li class="phase-item">法人受験・団体申込の営業開始（BAA既存顧客への優先案内）</li>
+          <li class="phase-item">L2「住宅AIスペシャリスト」の開発着手</li>
+          <li class="phase-item">制度の改善・フィードバック反映</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <span class="phase-period">Phase 3 ／ 13ヶ月〜</span>
+        <div class="phase-name">拡大フェーズ</div>
+        <ul class="phase-items">
+          <li class="phase-item">L2・L3の順次リリース・年間複数回の試験体制確立</li>
+          <li class="phase-item">法人会員制度（年会費型）の立ち上げ</li>
+          <li class="phase-item">認定企業データベースの公開（業界内での権威性の可視化）</li>
+          <li class="phase-item">住宅会社以外への拡大（建材メーカー・設計事務所・不動産会社）</li>
+          <li class="phase-item">更新受験者の収益化（2年目以降の安定収益源の確立）</li>
+          <li class="phase-item">他業界AI資格との連携・差別化の継続強化</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-gold"></div>
+
+    <div class="card-grid card-grid-3">
+      <div class="card">
+        <div class="card-title">次に決める論点①</div>
+        <div class="card-body">新建ハウジングへの収益配分をどう設計するか。受験料の何%を渡すか、または固定フィーか。</div>
+      </div>
+      <div class="card">
+        <div class="card-title">次に決める論点②</div>
+        <div class="card-body">法人格をどこに置くか。SHO-SAN単独運営 vs 新設一般社団法人 vs 新建ハウジングとの共同設立。</div>
+      </div>
+      <div class="card">
+        <div class="card-title">次に決める論点③</div>
+        <div class="card-body">初期投資の規模感。試験システム・教材開発にどこまで先行投資するか。既存BAAコンテンツの転用で最小化できるか。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 07 ═══ -->
+<section class="section" id="s7">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div class="section-header-text">
+        <span class="section-eyebrow">Authority Partners & Roadmap</span>
+        <h2 class="section-title">権威付け戦略<br>連携候補と実現ロードマップ</h2>
+      </div>
+    </div>
+
+    <p class="section-lead">
+      日本メディカルAI学会が文部科学省の後援を得たように、<br>住宅業界特化資格にも「国・業界団体・メディア」の<br>三位一体の権威付けを段階的に実現していく。
+    </p>
+
+    <!-- 難易度凡例 -->
+    <div style="display:flex;gap:20px;margin-bottom:36px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-light);">
+        <span style="display:inline-flex;gap:3px;"><span style="color:var(--accent-green);">●</span><span style="color:var(--accent-green);">●</span><span style="color:var(--accent-green);">●</span><span style="color:var(--rule);">●</span><span style="color:var(--rule);">●</span></span>
+        実現しやすい（今すぐ着手可）
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-light);">
+        <span style="display:inline-flex;gap:3px;"><span style="color:var(--accent-gold);">●</span><span style="color:var(--accent-gold);">●</span><span style="color:var(--accent-gold);">●</span><span style="color:var(--accent-gold);">●</span><span style="color:var(--rule);">●</span></span>
+        中程度（Phase 2で着手）
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-light);">
+        <span style="display:inline-flex;gap:3px;"><span style="color:var(--accent-red);">●</span><span style="color:var(--accent-red);">●</span><span style="color:var(--accent-red);">●</span><span style="color:var(--accent-red);">●</span><span style="color:var(--accent-red);">●</span></span>
+        難易度高い（大勝負・Phase 3）
+      </div>
+    </div>
+
+    <!-- Layer A -->
+    <div style="margin-bottom:12px;">
+      <span class="pill" style="background:var(--accent-green);">Layer A　住宅業界団体　—　最も現実的</span>
+    </div>
+
+    <div style="display:grid;gap:16px;margin-bottom:40px;">
+
+      <div style="border:1px solid var(--rule);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:260px 1fr 1fr;background:var(--section-bg);">
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:15px;margin-bottom:4px;">JBN・全国工務店協会</div>
+            <div style="font-size:11px;color:var(--ink-light);margin-bottom:10px;">約3,000社の地域工務店が会員</div>
+            <div style="display:flex;gap:3px;"><span style="color:var(--accent-green);font-size:14px;">●●●●</span><span style="color:var(--rule);font-size:14px;">●</span></div>
+          </div>
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">連携で得られること</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">「JBN推薦×新建ハウジング認定」で<strong style="color:var(--ink);">業界標準感</strong>が出る。3,000社の会員工務店への直接訴求路線。</div>
+          </div>
+          <div style="padding:16px 20px;">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">アプローチ方法</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">新建ハウジングから紹介ルートが最短。小柴さん経由で打診が可能な最優先候補。</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--rule);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:260px 1fr 1fr;background:var(--section-bg);">
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:15px;margin-bottom:4px;">住宅リフォーム推進協議会</div>
+            <div style="font-size:11px;color:var(--ink-light);margin-bottom:10px;">国土交通省所管・登録制度あり</div>
+            <div style="display:flex;gap:3px;"><span style="color:var(--accent-green);font-size:14px;">●●●</span><span style="color:var(--rule);font-size:14px;">●●</span></div>
+          </div>
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">連携で得られること</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">「国土交通省登録制度との接続」を印象付けられる。リフォーム領域まで対象拡大できる。</div>
+          </div>
+          <div style="padding:16px 20px;">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">アプローチ方法</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">Phase 2での協議開始が現実的。まずJBNとの関係構築を優先し、その後横展開。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Layer B -->
+    <div style="margin-bottom:12px;">
+      <span class="pill" style="background:var(--accent-gold);">Layer B　経済産業省・IPAルート　—　権威性が最も高い</span>
+    </div>
+
+    <div style="display:grid;gap:16px;margin-bottom:40px;">
+
+      <div style="border:1px solid var(--rule);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:260px 1fr 1fr;background:var(--section-bg);">
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:15px;margin-bottom:4px;">デジタルスキル標準（DSS）準拠</div>
+            <div style="font-size:11px;color:var(--ink-light);margin-bottom:10px;">経産省・IPA策定 / 申請不要</div>
+            <div style="display:flex;gap:3px;"><span style="color:var(--accent-green);font-size:14px;">●●●●●</span></div>
+          </div>
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">連携で得られること</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">シラバスをDSS ver.2.0に対応させ「経産省・IPA策定 デジタルスキル標準準拠」と明記するだけで<strong style="color:var(--ink);">国のお墨付き感</strong>が即日実現。コストゼロ。</div>
+          </div>
+          <div style="padding:16px 20px;">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">アプローチ方法</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">認定・申請一切不要。シラバス設計時にDSSの項目に対応させるだけ。<strong style="color:var(--accent-green);">今すぐできる最強コスパ施策。</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border:2px solid var(--accent-gold);overflow:hidden;position:relative;">
+        <div style="position:absolute;top:0;right:0;background:var(--accent-gold);color:#fff;font-size:10px;letter-spacing:0.1em;padding:4px 12px;">🏆 最大インパクト</div>
+        <div style="display:grid;grid-template-columns:260px 1fr 1fr;background:#fffdf5;">
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:15px;margin-bottom:4px;">第四次産業革命<br>スキル習得講座認定</div>
+            <div style="font-size:11px;color:var(--ink-light);margin-bottom:10px;">経済産業大臣認定 / Reスキル講座</div>
+            <div style="display:flex;gap:3px;"><span style="color:var(--accent-gold);font-size:14px;">●●●●</span><span style="color:var(--rule);font-size:14px;">●</span></div>
+          </div>
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">連携で得られること</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;"><strong style="color:var(--accent-red);">厚生労働省「教育訓練給付金」の対象に。</strong>受講料の最大70%が補助対象となり、工務店が社員に「実質ほぼ無料で受けさせられる」最強の購買動機になる。</div>
+          </div>
+          <div style="padding:16px 20px;">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">アプローチ方法</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">BAA自体の認定申請が必要。審査あり。Phase 2〜3で実績を積んでから申請が現実的。認定されれば業界内で圧倒的優位に。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Layer C -->
+    <div style="margin-bottom:12px;">
+      <span class="pill" style="background:var(--accent-red);">Layer C　国土交通省ルート　—　大勝負・最大権威</span>
+    </div>
+
+    <div style="display:grid;gap:16px;margin-bottom:40px;">
+
+      <div style="border:1px solid var(--rule);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:260px 1fr 1fr;background:var(--section-bg);">
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:15px;margin-bottom:4px;">国土交通省「後援」名義</div>
+            <div style="font-size:11px;color:var(--ink-light);margin-bottom:10px;">建築・都市DX政策との接続</div>
+            <div style="display:flex;gap:3px;"><span style="color:var(--accent-red);font-size:14px;">●●●●●</span></div>
+          </div>
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">連携で得られること</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">認定証に「国土交通省後援」が入れば官公庁・大手ハウスメーカーへの展開が一気に開く。業界内で他の追随を許さない絶対的地位を確立できる。</div>
+          </div>
+          <div style="padding:16px 20px;">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">アプローチ方法</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">住団連・JBN経由で推薦状をもらい申請するルートが現実的。まず実績（合格者数・認定企業数）が必要。Phase 3の目標として設定。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Layer D -->
+    <div style="margin-bottom:12px;">
+      <span class="pill" style="background:var(--accent-navy);">Layer D　AI専門機関との連携　—　コンテンツ権威</span>
+    </div>
+
+    <div style="display:grid;gap:16px;margin-bottom:48px;">
+
+      <div style="border:1px solid var(--rule);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:260px 1fr 1fr;background:var(--section-bg);">
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:15px;margin-bottom:4px;">JDLA（日本ディープラーニング協会）</div>
+            <div style="font-size:11px;color:var(--ink-light);margin-bottom:10px;">G検定・E資格 運営 / 累計15万名超</div>
+            <div style="display:flex;gap:3px;"><span style="color:var(--accent-gold);font-size:14px;">●●●</span><span style="color:var(--rule);font-size:14px;">●●</span></div>
+          </div>
+          <div style="padding:16px 20px;border-right:1px solid var(--rule);">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">連携で得られること</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">「JDLA認定カリキュラム準拠」とすることで、G検定受験者に「住宅特化の次の一手」として訴求できる。既存AI人材の受け皿になれる。</div>
+          </div>
+          <div style="padding:16px 20px;">
+            <div style="font-size:11px;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:6px;">アプローチ方法</div>
+            <div style="font-size:13px;color:var(--ink-mid);line-height:1.7;">JDLAは企業会員制度があり協議しやすい。Phase 2での打診を推奨。住宅業界特化の新市場開拓として相手にもメリットがある提案ができる。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 優先度ロードマップ -->
+    <div class="rule-gold"></div>
+    <div style="margin:40px 0 16px;"><span class="pill">権威付けロードマップ　—　積み上げ順序</span></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--rule);overflow:hidden;margin-bottom:24px;">
+      <div style="background:var(--accent-green);padding:24px 24px 28px;">
+        <div style="font-size:10px;letter-spacing:0.2em;color:rgba(255,255,255,0.6);margin-bottom:8px;">TODAY → PHASE 1</div>
+        <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:16px;color:#fff;margin-bottom:16px;">まず今すぐやる</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+          <li style="font-size:13px;color:rgba(255,255,255,0.85);padding-left:14px;position:relative;line-height:1.6;"><span style="position:absolute;left:0;color:rgba(255,255,255,0.5);">▸</span>DSS準拠の明示（申請不要）</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.85);padding-left:14px;position:relative;line-height:1.6;"><span style="position:absolute;left:0;color:rgba(255,255,255,0.5);">▸</span>新建ハウジング認定の確立</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.85);padding-left:14px;position:relative;line-height:1.6;"><span style="position:absolute;left:0;color:rgba(255,255,255,0.5);">▸</span>JBNへの打診開始</li>
+        </ul>
+      </div>
+      <div style="background:var(--accent-gold);padding:24px 24px 28px;border-left:1px solid rgba(255,255,255,0.2);">
+        <div style="font-size:10px;letter-spacing:0.2em;color:rgba(255,255,255,0.6);margin-bottom:8px;">PHASE 2　7〜12ヶ月</div>
+        <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:16px;color:#fff;margin-bottom:16px;">実績を武器に交渉</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+          <li style="font-size:13px;color:rgba(255,255,255,0.85);padding-left:14px;position:relative;line-height:1.6;"><span style="position:absolute;left:0;color:rgba(255,255,255,0.5);">▸</span>JBN推薦の正式取得</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.85);padding-left:14px;position:relative;line-height:1.6;"><span style="position:absolute;left:0;color:rgba(255,255,255,0.5);">▸</span>JDLA連携の協議開始</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.85);padding-left:14px;position:relative;line-height:1.6;"><span style="position:absolute;left:0;color:rgba(255,255,255,0.5);">▸</span>住宅リフォーム推進協議会へ打診</li>
+        </ul>
+      </div>
+      <div style="background:var(--accent-red);padding:24px 24px 28px;border-left:1px solid rgba(255,255,255,0.2);">
+        <div style="font-size:10px;letter-spacing:0.2em;color:rgba(255,255,255,0.6);margin-bottom:8px;">PHASE 3　13ヶ月〜</div>
+        <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:16px;color:#fff;margin-bottom:16px;">大勝負・業界標準化</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+          <li style="font-size:13px;color:rgba(255,255,255,0.85);padding-left:14px;position:relative;line-height:1.6;"><span style="position:absolute;left:0;color:rgba(255,255,255,0.5);">▸</span>Reスキル講座認定申請（給付金対象）</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.85);padding-left:14px;position:relative;line-height:1.6;"><span style="position:absolute;left:0;color:rgba(255,255,255,0.5);">▸</span>国土交通省後援の取得申請</li>
+          <li style="font-size:13px;color:rgba(255,255,255,0.85);padding-left:14px;position:relative;line-height:1.6;"><span style="position:absolute;left:0;color:rgba(255,255,255,0.5);">▸</span>業界標準資格としての地位確立</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background:var(--accent-navy);padding:24px 28px;border-left:4px solid var(--accent-gold);">
+      <div style="font-size:11px;letter-spacing:0.15em;color:var(--accent-gold);margin-bottom:10px;">GOAL IMAGE</div>
+      <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:16px;color:#fff;line-height:1.8;">
+        「経産省・IPA デジタルスキル標準準拠」×「新建ハウジング認定」×「JBN推薦」×「国土交通省後援」<br>
+        <span style="color:var(--accent-gold);">この4つが揃った時、住宅業界AI人材資格の絶対的スタンダードになる。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 08 ═══ -->
+<section class="section" id="s8">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div class="section-header-text">
+        <span class="section-eyebrow">Dream Ideas & Expansion</span>
+        <h2 class="section-title">夢想図<br>こんな資格にしたい</h2>
+      </div>
+    </div>
+
+    <p class="section-lead">
+      「こんなことできたらいいよね」をここに集める。<br>すべてが今すぐ実現できなくていい。<br>目指す姿が見えていれば、逆算して動ける。
+    </p>
+
+    <!-- 夢アイデア群 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:48px;">
+
+      <div style="border:1px solid var(--rule);border-top:3px solid var(--accent-gold);overflow:hidden;">
+        <div style="padding:20px 24px;background:var(--warm-white);">
+          <div style="font-size:10px;letter-spacing:0.2em;color:var(--accent-gold);margin-bottom:8px;">DREAM 01</div>
+          <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:17px;margin-bottom:12px;">「工務店版 中小企業DX認定」との連動</div>
+          <div style="font-size:13.5px;color:var(--ink-mid);line-height:1.85;margin-bottom:16px;">経済産業省の「DX認定制度」は中小企業が取得できる制度。住宅AIパスポートの取得が「DX認定申請の加点要素」になれば、工務店が資格を取る理由がさらに強くなる。補助金・税制優遇との接続まで描ける。</div>
+          <div style="background:var(--section-bg);padding:10px 14px;font-size:12px;color:var(--ink-light);border-left:2px solid var(--accent-gold);">実現すると：工務店経営者が「補助金のために取る資格」になる。購買障壁が一気に下がる。</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--rule);border-top:3px solid var(--accent-gold);overflow:hidden;">
+        <div style="padding:20px 24px;background:var(--warm-white);">
+          <div style="font-size:10px;letter-spacing:0.2em;color:var(--accent-gold);margin-bottom:8px;">DREAM 02</div>
+          <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:17px;margin-bottom:12px;">「住宅AI認定企業」格付けランキング</div>
+          <div style="font-size:13.5px;color:var(--ink-mid);line-height:1.85;margin-bottom:16px;">合格者数・認定取得率・活用事例数などのスコアで「住宅AI先進企業ランキング」を新建ハウジングが毎年発表。掲載を目指して各社が社員に受験させる競争が生まれる。施主も「AI活用の工務店」を選ぶ指標になる。</div>
+          <div style="background:var(--section-bg);padding:10px 14px;font-size:12px;color:var(--ink-light);border-left:2px solid var(--accent-gold);">実現すると：「うちもランキングに入りたい」という経営者の競争心が強力な集客装置になる。</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--rule);border-top:3px solid var(--accent-navy);overflow:hidden;">
+        <div style="padding:20px 24px;background:var(--warm-white);">
+          <div style="font-size:10px;letter-spacing:0.2em;color:var(--accent-navy);margin-bottom:8px;">DREAM 03</div>
+          <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:17px;margin-bottom:12px;">施主向け「AI活用工務店」検索サイト</div>
+          <div style="font-size:13.5px;color:var(--ink-mid);line-height:1.85;margin-bottom:16px;">認定企業が掲載される施主向けポータルサイトを新建ハウジングと共同で開設。「AIを使って家づくりを効率化・高品質化している工務店」として施主に直接訴求。LIXIL SWBF的な掲載メディアの住宅AI版。</div>
+          <div style="background:var(--section-bg);padding:10px 14px;font-size:12px;color:var(--ink-light);border-left:2px solid var(--accent-navy);">実現すると：資格が「集客ツール」になる。工務店が「受注のために取る資格」に昇格する。</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--rule);border-top:3px solid var(--accent-navy);overflow:hidden;">
+        <div style="padding:20px 24px;background:var(--warm-white);">
+          <div style="font-size:10px;letter-spacing:0.2em;color:var(--accent-navy);margin-bottom:8px;">DREAM 04</div>
+          <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:17px;margin-bottom:12px;">「住宅AI活用事例大賞」の年次表彰</div>
+          <div style="font-size:13.5px;color:var(--ink-mid);line-height:1.85;margin-bottom:16px;">認定者・認定企業の中から「最もAIを活用して成果を出した工務店・個人」を新建ハウジングが毎年表彰。GUGAが「GenAI HR Awards」を開催しているのと同じモデル。表彰されることが最高のステータスになる。</div>
+          <div style="background:var(--section-bg);padding:10px 14px;font-size:12px;color:var(--ink-light);border-left:2px solid var(--accent-navy);">実現すると：表彰を目指してAI活用が加速。事例コンテンツが自然に蓄積されBAA教材にも転用できる。</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--rule);border-top:3px solid var(--accent-green);overflow:hidden;">
+        <div style="padding:20px 24px;background:var(--warm-white);">
+          <div style="font-size:10px;letter-spacing:0.2em;color:var(--accent-green);margin-bottom:8px;">DREAM 05</div>
+          <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:17px;margin-bottom:12px;">建材メーカー・住設メーカーへの横展開</div>
+          <div style="font-size:13.5px;color:var(--ink-mid);line-height:1.85;margin-bottom:16px;">LIXILやパナソニック ハウジングなど住設・建材メーカーの営業担当が「住宅AI認定」を取ることで、工務店への提案力を証明できる。メーカー側が社員研修として法人一括受験する大口顧客になり得る。</div>
+          <div style="background:var(--section-bg);padding:10px 14px;font-size:12px;color:var(--ink-light);border-left:2px solid var(--accent-green);">実現すると：受験者の母数が工務店の枠を超えて爆発的に拡大。BtoBの大口契約が生まれる。</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--rule);border-top:3px solid var(--accent-green);overflow:hidden;">
+        <div style="padding:20px 24px;background:var(--warm-white);">
+          <div style="font-size:10px;letter-spacing:0.2em;color:var(--accent-green);margin-bottom:8px;">DREAM 06</div>
+          <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:17px;margin-bottom:12px;">「住宅AI人材」採用マッチングプラットフォーム</div>
+          <div style="font-size:13.5px;color:var(--ink-mid);line-height:1.85;margin-bottom:16px;">資格保有者のデータベースを活用し、工務店が「住宅AI認定人材」を採用できるマッチング機能を提供。転職者側は「この資格を持っていると工務店に就職しやすい」という強力な動機が生まれる。</div>
+          <div style="background:var(--section-bg);padding:10px 14px;font-size:12px;color:var(--ink-light);border-left:2px solid var(--accent-green);">実現すると：資格が「採用インフラ」になる。工務店の人材課題と資格の価値が直接接続される。</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--rule);border-top:3px solid var(--accent-red);overflow:hidden;">
+        <div style="padding:20px 24px;background:var(--warm-white);">
+          <div style="font-size:10px;letter-spacing:0.2em;color:var(--accent-red);margin-bottom:8px;">DREAM 07</div>
+          <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:17px;margin-bottom:12px;">住宅AI資格×住宅ローン優遇の提案</div>
+          <div style="font-size:13.5px;color:var(--ink-mid);line-height:1.85;margin-bottom:16px;">「住宅AI認定企業」で建てた施主に対して、住宅金融支援機構（フラット35）や民間金融機関が金利優遇を提供する仕組みを提案。「AI活用工務店で建てるとローンが安くなる」となれば、施主が工務店に資格を求めるようになる。</div>
+          <div style="background:var(--section-bg);padding:10px 14px;font-size:12px;color:var(--ink-light);border-left:2px solid var(--accent-red);">実現すると：需要が供給側（工務店）ではなく消費者側（施主）から生まれる構造に転換する。</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--rule);border-top:3px solid var(--accent-red);overflow:hidden;">
+        <div style="padding:20px 24px;background:var(--warm-white);">
+          <div style="font-size:10px;letter-spacing:0.2em;color:var(--accent-red);margin-bottom:8px;">DREAM 08</div>
+          <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:17px;margin-bottom:12px;">海外展開　—　アジア住宅市場へ</div>
+          <div style="font-size:13.5px;color:var(--ink-mid);line-height:1.85;margin-bottom:16px;">日本の工務店モデル・住宅品質は東南アジアで高く評価されている。「Japan Housing AI Certification」として英語版を展開し、アジア市場での日本式住宅AI人材育成の輸出モデルをつくる。長期的な国際展開への布石。</div>
+          <div style="background:var(--section-bg);padding:10px 14px;font-size:12px;color:var(--ink-light);border-left:2px solid var(--accent-red);">実現すると：日本の住宅AI人材育成モデルがアジアのスタンダードになる。壮大な一手。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- まとめ引用 -->
+    <div style="background:var(--accent-navy);padding:32px 36px;border-left:4px solid var(--accent-gold);margin-bottom:0;">
+      <div style="font-size:10px;letter-spacing:0.25em;color:var(--accent-gold);margin-bottom:14px;">NORTH STAR　—　目指す姿</div>
+      <div style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:18px;color:#fff;line-height:2.2;">
+        住宅AIパスポートを持っていることが、<br>
+        <strong style="font-weight:700;color:var(--accent-gold);">工務店で働く人の「当たり前」になる日</strong>を目指す。<br>
+        <span style="font-size:14px;color:rgba(255,255,255,0.55);">宅建士が不動産業界の当たり前であるように。</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ CLOSING ═══ -->
+<section class="closing">
+  <span class="closing-label">Summary</span>
+  <h2 class="closing-title">
+    住宅業界に、<strong>AI人材の新しいスタンダード</strong>をつくる。<br>
+    新建ハウジングの権威と、SHO-SANの実行力で。
+  </h2>
+  <div class="closing-items">
+    <div class="closing-item">
+      <span class="closing-item-num">3</span>
+      <span class="closing-item-label">資格階層</span>
+    </div>
+    <div class="closing-item">
+      <span class="closing-item-num">6</span>
+      <span class="closing-item-label">露出チャネル</span>
+    </div>
+    <div class="closing-item">
+      <span class="closing-item-num">4</span>
+      <span class="closing-item-label">権威付け連携候補</span>
+    </div>
+    <div class="closing-item">
+      <span class="closing-item-num">8</span>
+      <span class="closing-item-label">夢のアイデア</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
